@@ -109,7 +109,42 @@
             <!--begin::Container-->
             <div class="container-fluid">
                 <!--begin::Start Navbar Links-->
-                <ul class="navbar-nav">
+                <ul class="navbar-nav"> 
+                    <!-- Navbar: Sección de Usuario -->
+<ul class="navbar-nav ms-auto">
+    <?php if (isset($_SESSION['usuario_id'])): ?>
+        <li class="nav-item dropdown user-menu">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <!-- Mostramos la foto desde la ruta de archivos -->
+                <img src="uploads/fotos/<?php echo $_SESSION['usuario_foto']; ?>"
+                     class="user-image rounded-circle shadow" alt="Foto de Usuario">
+                
+                <!-- Mostramos el nombre guardado en la sesión -->
+                <span class="d-none d-md-inline"><?php echo $_SESSION['usuario_nombre']; ?></span>
+            </a>
+            
+            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                <li class="user-header bg-primary">
+                    <img src="uploads/fotos/<?php echo $_SESSION['paola.jpg']; ?>" 
+     class="user-image rounded-circle shadow" alt="Foto">
+                    <p>
+                        <?php echo $_SESSION['usuario_nombre']; ?>
+                        <small>Desde <?php echo $_SESSION['usuario_fecha_registro']; ?></small>
+                    </p>
+                </li>
+                <li class="user-footer">
+                    <a href="?view=perfil" class="btn btn-default btn-flat">Perfil</a>
+                    <a href="?view=logout" class="btn btn-default btn-flat float-end">Cerrar sesión</a>
+                </li>
+            </ul>
+        </li>
+    <?php else: ?>
+        <!-- Botón de login si no hay sesión iniciada -->
+        <li class="nav-item">
+            <a href="?view=login" class="nav-link">Iniciar Sesión</a>
+        </li>
+    <?php endif; ?>
+</ul>
                     <li class="nav-item">
                         <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
                             <i class="bi bi-list"></i>
@@ -395,6 +430,67 @@
             <div class="sidebar-wrapper">
                 <nav class="mt-2" aria-label="Main navigation">
                     <!--begin::Sidebar Menu-->
+                    <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+    <div class="sidebar-wrapper">
+        <nav class="mt-2">
+            
+            <!-- AQUÍ ES DONDE DEBES PONER EL CÓDIGO DE VALIDACIÓN -->
+            <?php if (isset($_SESSION['usuario_id'])): ?>
+                
+                <!-- Tu lista de navegación (ul, li, etc.) va aquí adentro -->
+                <ul class="nav nav-pills nav-sidebar flex-column">
+                    <!-- Inicio -->
+    <li class="nav-item">
+        <a href="?view=index" class="nav-link">
+            <p>Inicio</p>
+        </a>
+    </li>
+    <!-- Menu -->
+    <li class="nav-item">
+        <a href="?view=menu" class="nav-link">
+            <p>Menu</p>
+        </a>
+    </li>
+    <!-- Contactos -->
+    <li class="nav-item">
+        <a href="?view=contactos" class="nav-link">
+            <p>Contactos</p>
+        </a>
+    </li>
+
+    <!-- Nosotros -->
+    <li class="nav-item">
+        <a href="?view=nosotros" class="nav-link">
+            <p>Nosotros</p>
+        </a>
+    </li>
+
+    <!-- Reservas -->
+    <li class="nav-item">
+        <a href="?view=reservas" class="nav-link">
+            <p>Reservas</p>
+        </a>
+    </li>
+
+    <!-- Gestionar Usuarios -->
+    <li class="nav-item">
+        <a href="?view=Gestionar_Usuarios" class="nav-link">
+            <p>Gestionar_Usuarios</p>
+        </a>
+    </li>
+</ul>
+                    <!-- ... resto de tus enlaces ... -->
+                </ul>
+
+            <?php else: ?>
+                <!-- Lo que verá el usuario si NO ha iniciado sesión -->
+                <p class="text-center text-muted mt-3">Por favor, inicie sesión.</p>
+            <?php endif; ?>
+            <!-- AQUÍ TERMINA EL CÓDIGO DE VALIDACIÓN -->
+
+        </nav>
+    </div>
+</aside>
                     <ul
                         class="nav sidebar-menu flex-column"
                         data-lte-toggle="treeview"

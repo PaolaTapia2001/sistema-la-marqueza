@@ -1,6 +1,13 @@
 <?php
 class UserData
 {
+    public static function getAll() {
+    $sql = "SELECT * FROM personas"; // Asegúrate de que esta sea tu tabla de usuarios/personas
+    $query = Database::getCon()->prepare($sql);
+    $query->execute();
+    return $query->fetchAll(PDO::FETCH_CLASS, "UserData");
+}
+
     public static function getLogin($cedula, $upass)
     {
         try {
